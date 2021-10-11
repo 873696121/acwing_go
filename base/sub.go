@@ -19,7 +19,7 @@ func cmp(a string, b string) bool {
 
 func sub(a string, b string) string {
 	if !cmp(a, b) {
-		return fmt.Sprintf("-%s", sub(b, a))
+		return "-" + sub(b, a)
 	}
 	t := 0
 	var A, B, c []int
@@ -41,12 +41,12 @@ func sub(a string, b string) string {
 			t = 0
 		}
 	}
-	var res string
-	for i := len(c); i >= 0; i -- {
-		res += strconv.Itoa(c[i])
+	for len(c) > 1 && c[len(c) - 1] == 0 {
+		c = c[0:len(c) - 1]
 	}
-	for len(c) > 1 && c[len(c) - 1:][0] == 0 {
-
+	var res string
+	for i := len(c) - 1; i >= 0; i -- {
+		res += strconv.Itoa(c[i])
 	}
 	return res
 }
